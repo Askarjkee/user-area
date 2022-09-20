@@ -1,6 +1,6 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {useStyles} from "./MainLayout.styles";
-import {AppBar, Box, Button, IconButton, Menu, MenuItem, Toolbar, Typography} from "@mui/material";
+import {AppBar, Box, Button, IconButton, Toolbar, Typography} from "@mui/material";
 import {Outlet, useLocation, useNavigate} from "react-router-dom"
 import MenuIcon from '@mui/icons-material/Menu';
 import {useAppDispatch, useAppSelector} from "../../hooks/redux";
