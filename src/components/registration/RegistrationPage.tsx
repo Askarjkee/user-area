@@ -17,6 +17,7 @@ const RegistrationPage = () => {
 
     const handleSubmit = (e: React.SyntheticEvent): void => {
         e.preventDefault();
+        if (!userName || !userPassword) return;
         setStatus('loading');
         setTimeout(() => {
             if (usersData.some(user => user.userName === userName)) {

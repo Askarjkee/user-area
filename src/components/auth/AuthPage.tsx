@@ -64,9 +64,12 @@ const AuthPage = () => {
                     <LoadingButton loading={status === 'loading'} type="submit" onClick={(e) => onSubmit(e)}>
                         Login
                     </LoadingButton>
-                    <Button onClick={() => navigate('/registration')} >
-                        Registration
-                    </Button>
+                    {
+                        status !== 'loading' &&
+						<Button onClick={() => navigate('/registration')} >
+							Registration
+						</Button>
+                    }
                 </Box>
             </form>
         </Box>
