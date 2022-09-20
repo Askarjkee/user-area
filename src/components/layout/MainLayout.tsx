@@ -1,13 +1,19 @@
 import React, {useState} from 'react';
 import {useStyles} from "./MainLayout.styles";
-import {AppBar, Button, IconButton, Toolbar, Typography} from "@mui/material";
-import {Outlet,useLocation} from "react-router-dom"
+import {AppBar, Box, Button, IconButton, Menu, MenuItem, Toolbar, Typography} from "@mui/material";
+import {Outlet, useLocation, useNavigate} from "react-router-dom"
 import MenuIcon from '@mui/icons-material/Menu';
+import {useAppDispatch, useAppSelector} from "../../hooks/redux";
+import {AccountCircle} from "@mui/icons-material";
+import {logout} from "../../redux/slice/auth/authSlice";
 
 
 const MainLayout = () => {
     const classes = useStyles();
     const { pathname } = useLocation();
+    const isAuth = useAppSelector(state => state.auth.authData?.isAuth);
+    const navigate = useNavigate();
+    const dispatch = useAppDispatch();
 
     return (
         <>
@@ -25,7 +31,23 @@ const MainLayout = () => {
                     <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
                         {`${pathname.split('').slice(1).join('').toUpperCase()}`}
                     </Typography>
-                    <Button color="inherit">Login</Button>
+                    {
+                        isAuth ?
+                            <Box className={classes.user}>
+                                <Button sx={{color: '#fff'}} onClick={() => dispatch(logout())}>Logout</Button>
+                                <IconButton
+                                    size="large"
+                                    aria-label="account of current user"
+                                    aria-controls="menu-appbar"
+                                    aria-haspopup="true"
+                                    color="inherit"
+                                >
+                                    <AccountCircle />
+                                </IconButton>
+                            </Box>
+                            :
+                            <Button color="inherit" onClick={() => navigate('/login')}>Login</Button>
+                    }
                 </Toolbar>
             </AppBar>
             <Outlet/>

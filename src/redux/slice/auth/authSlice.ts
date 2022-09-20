@@ -27,12 +27,8 @@ export const authSlice = createSlice({
         register: (state, action: PayloadAction<IUser>) => {
             state.usersData.push(action.payload)
         },
-        login: (state, action: PayloadAction<IAuthData>) => {
-            const { userName, password } = action.payload;
-            const userData = state.usersData.find(user => user.userName === userName && user.password === password);
-            if (userData) {
-                state.authData = {isAuth: true, ...action.payload}
-            }
+        setAuthData: (state, action: PayloadAction<IAuthData>) => {
+            state.authData = {isAuth: true, ...action.payload}
         },
         logout: (state) => {
             state.authData = null;
@@ -40,6 +36,6 @@ export const authSlice = createSlice({
     }
 })
 
-export const { register, login, logout } = authSlice.actions;
+export const { register, setAuthData, logout } = authSlice.actions;
 
 export default authSlice.reducer;
