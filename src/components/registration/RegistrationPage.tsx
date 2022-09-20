@@ -1,23 +1,18 @@
 import React, {useState} from 'react';
 import {Box, Button, TextField} from "@mui/material";
-import {useStyles} from "../layout/MainLayout.styles";
-import {useNavigate} from "react-router-dom";
+import {useStyles} from "./RegistrationPage.styles";
 
-const AuthPage = () => {
+const RegistrationPage = () => {
     const classes = useStyles();
-    const navigate = useNavigate();
     const [userName, setUserName] = useState('');
     const [userPassword, setUserPassword] = useState('');
 
-    const onSubmit = (e: React.SyntheticEvent): void => {
-        e.preventDefault();
-        console.log({userName, userPassword})
-    }
-
     return (
         <Box className={classes.root}>
-            <Box className={classes.title}>Auth page</Box>
-            <form className={classes.inputRoot}>
+            <Box className={classes.title}>
+                Registration
+            </Box>
+            <form className={classes.form}>
                 <TextField
                     label="username"
                     id="user-name"
@@ -33,17 +28,12 @@ const AuthPage = () => {
                     type="password"
                     className={classes.input}
                 />
-                <Box className={classes.submit}>
-                    <Button type="submit" onClick={(e) => onSubmit(e)}>
-                        Login
-                    </Button>
-                    <Button onClick={() => navigate('/registration')}>
-                        Registration
-                    </Button>
-                </Box>
+                <Button>
+                    Submit
+                </Button>
             </form>
         </Box>
     );
 };
 
-export default AuthPage;
+export default RegistrationPage;
